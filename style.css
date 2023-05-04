@@ -45,12 +45,10 @@ a:hover{
 }
 /*definimos o tamanho da tela mobile e começamos a adaptação*/
 @media (max-width: 600px){
-    #btn-mobile{
-        display: block;
-    }
+    
     #menu{
         /*display: none;*/
-        display: none;
+        display: block;
         position: absolute;
         width: 100%;
         top: 70px;
@@ -59,17 +57,60 @@ a:hover{
         transition: .6s;
         background: #e7e7e7;
         z-index: 1000;
+        visibility: hidden;/*outra forma de escondes os itens no menu sem utilizar o displa block*/
+        overflow-y: hidden;/*escondemos os elementos ate o corpo ficar em seu tamanho total*/
         
     }
     /*usando a função para mostrar e esconder o menu*/
     #nav.active #menu{
         height: calc(100vh - 70px);
-        display: block;
+        visibility: visible;
+        overflow-y: auto;/*adapta a tela aquantidade de itens no menu caso não tenha pode ser que não mostre todos os itens*/
     }
     /*ajustando os itens dentro do menu*/
     #menu a {
         padding: 1rem 0;
         margin: 0 1rem;
         border-bottom: 2px solid rgba(0, 0, 0, .05);
+    }
+
+    #btn-mobile{
+        display: flex;
+        padding: .5rem 1rem;
+        font-size: 1rem;
+        border: none;
+        background: none;
+        cursor: pointer;
+        gap: .5rem;
+    }
+
+    #hamburguer{
+        border-top: 2px solid;
+        width: 20px;
+    }
+
+    #hamburguer::after, #hamburguer::before{
+        content: '';/*para o after existir temos que dar conteudo a ele*/
+        display: block;/*indicando que é um elemento de bloco assim podemos utilizar o conteudo mesmo estando vazio*/
+        width: 20px;
+        height: 2px;
+        background:currentColor;/*variavel que utiliza a cor que esta no id principal, nesse caso hamburguer que tem a cor preta*/
+        margin-top: 5px;
+        transition: .3s;
+        position: relative;/*para poder deslocar o after para cima e fazer o X com o Before*/
+    }
+
+    #nav.active #hamburguer{/*quando o menu estiver ativo*/
+        border-top-color: transparent;/*não exclui o border somente autera a cor para transparente*/
+    }
+
+    #nav.active #hamburguer::before{
+        transform: rotate(135deg);
+
+    }
+
+    #nav.active #hamburguer::after{
+        transform: rotate(-135deg);
+        top: -7px;/*desloca para cima formando o X que precisamos*/
     }
 }
