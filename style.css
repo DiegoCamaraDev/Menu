@@ -50,21 +50,23 @@ a:hover{
     }
     #menu{
         /*display: none;*/
-        display: block;
+        display: none;
         position: absolute;
         width: 100%;
         top: 70px;
         right: 0px;
-        height: calc(100vh - 70px);
+        height: 0px;
+        transition: .6s;
         background: #e7e7e7;
         z-index: 1000;
         
     }
     /*usando a função para mostrar e esconder o menu*/
     #nav.active #menu{
+        height: calc(100vh - 70px);
         display: block;
     }
-
+    /*ajustando os itens dentro do menu*/
     #menu a {
         padding: 1rem 0;
         margin: 0 1rem;
